@@ -43,17 +43,17 @@ jobs:
       uses: appleboy/scp-action@master
       with:
         host: builds.eclips-e.space
-        username: wizards-build-push
+        username: weh
         key: ${{ secrets.CENTCOMM_WIZARDS_BUILDS_PUSH_KEY }}
         source: "release/${{ github.sha }}"
-        target: "/home/wizards-build-push/builds_dir/builds/"
+        target: "/var/www/builds.eclips-e.space/jailbreak/builds"
         strip_components: 1
 
     - name: Update manifest JSON
       uses: appleboy/ssh-action@master
       with:
         host: builds.eclips-e.space
-        username: wizards-build-push
+        username: weh
         key: ${{ secrets.CENTCOMM_WIZARDS_BUILDS_PUSH_KEY }}
-        script: /home/wizards-build-push/push.ps1 ${{ github.sha }}
+        script: /var/www/builds.eclips-e.space/manifest.py ${{ github.sha }}
 
